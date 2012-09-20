@@ -104,7 +104,7 @@ class TwitterCallback extends Controller {
 			'consumerKey' => self::$consumer_key,
 			'consumerSecret' => self::$consumer_secret,
 			'siteUrl' => 'https://api.twitter.com/oauth',
-			'authorizeUrl' => 'https://api.twitter.com/oauth/authenticate'
+			'authorizeUrl' => 'https://api.twitter.com/oauth/authorize'
 		);
 		$consumer = new Zend_Oauth_Consumer($config);
 		$token = $consumer->getRequestToken();
@@ -124,7 +124,7 @@ class TwitterCallback extends Controller {
 			'consumerKey' => self::$consumer_key,
 			'consumerSecret' => self::$consumer_secret,
 			'siteUrl' => 'https://api.twitter.com/oauth',
-			'authorizeUrl' => 'https://api.twitter.com/oauth/authenticate'
+			'authorizeUrl' => 'https://api.twitter.com/oauth/authorize'
 		);
 		$consumer = new Zend_Oauth_Consumer($config);
 		$token = $consumer->getRequestToken();
@@ -149,7 +149,7 @@ class TwitterCallback extends Controller {
 			'consumerKey' => self::$consumer_key,
 			'consumerSecret' => self::$consumer_secret,
 			'siteUrl' => 'https://api.twitter.com/oauth',
-			'authorizeUrl' => 'https://api.twitter.com/oauth/authenticate'
+			'authorizeUrl' => 'https://api.twitter.com/oauth/authorize'
 		);
 		$consumer = new Zend_Oauth_Consumer($config);
 		$token = Session::get('Twitter.Request.Token');
@@ -215,7 +215,7 @@ class TwitterCallback extends Controller {
 				'consumerKey' => self::$consumer_key,
 				'consumerSecret' => self::$consumer_secret,
 				'siteUrl' => 'https://api.twitter.com/oauth',
-				'authorizeUrl' => 'https://api.twitter.com/oauth/authenticate'
+				'authorizeUrl' => 'https://api.twitter.com/oauth/authorize'
 			);
 			$consumer = new Zend_Oauth_Consumer($config);
 			$token = Session::get('Twitter.Request.Token');
