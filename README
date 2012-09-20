@@ -1,0 +1,25 @@
+====================================
+ Twitter Authentication Module 1.1
+         For SilverStripe
+====================================
+Developed and maintained by RentBox
+ support@rentbox.co.nz/@rentboxapp
+====================================
+
+Requirements:
+* Twitter consumer key/secret
+	- https://dev.twitter.com/apps
+
+Installation:
+- Extract twitter folder to your site root
+- Provide your consumer key/secret using the provided methods
+	(TwitterCallback::set_consumer_key/secret)
+- Run /dev/build
+
+This adds two extra fields to the Member table, TwitterID and TwitterHandle.
+OAuth tokens *are not* stored. You can not use this module for communicating
+with Twitter beyond the sign in process.
+
+This module adds a button to MemberFormFields, but not FrontendField. You can
+add your own button as well. For an example of how to do so, have a look at
+TwitterIdentifier, twitter.js and the three related methods in TwitterCallback.
