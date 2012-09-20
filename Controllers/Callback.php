@@ -282,7 +282,7 @@ class TwitterCallback extends Controller {
 				foreach($param_post as $name => $val) {
 					$client->setParameterPost($name, $val);
 				}
-				$response $client->request();
+				$response = $client->request();
 
 				$data = $response->getBody();
 				$data = json_decode($data);
