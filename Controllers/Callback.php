@@ -249,6 +249,50 @@ class TwitterCallback extends Controller {
 			return $this->redirect(Director::baseURL());
 		}
 	}
+
+	/**
+	 * Generalized API access
+	 */
+	public function API(SS_HTTPRequest $req, $uri = NULL, $param_get = NULL, $param_post = NULL) {
+		$token = SecurityToken::inst();
+		if($req->getVars() && !$req->getVar('denied') && Session::get('Twitter.Request.Token')) {
+			$config = array(
+				'consumerKey' => self::$consumer_key,
+				'consumerSecret' => self::$consumer_secret,
+				'siteUrl' => 'https://api.twitter.com/oauth',
+				'authorizeUrl' => 'https://api.twitter.com/oauth/authorize'
+			);
+			$consumer = new Zend_Oauth_Consumer($config);
+			$token = Session::get('Twitter.Request.Token');
+			if(is_string($token)) {
+				$token = unserialize($token);
+			}
+			try {
+				$access = $consumer->getAccessToken($req->getVars(), $token);
+				$client = $access->getHttpClient($config);
+				$client->setUri($url);
+				if($method = 'get') {
+					$client->setMethod(Zend_Http_Client::GET);
+				} elseif($method = 'post') {
+					$client->setMethod(Zend_Http_Client::POST);
+				}
+				foreach($param_get as $name => $val) {
+					$client->setParameterGet($name, $val);
+				}
+				foreach($param_post as $name => $val) {
+					$client->setParameterPost($name, $val);
+				}
+				$response $client->request();
+
+				$data = $response->getBody();
+				$data = json_decode($data);
+
+				return $data;
+			} catch(Exception $e) {
+				$this->httpError(500, $e->getMessage());
+			}
+		}
+	}
 	
 	public function AbsoluteLink($action = null) {
 		return Director::absoluteURL($this->Link($action));
